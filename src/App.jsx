@@ -1,21 +1,28 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import OurTasks from "./pages/OurTasks";
+import Products from "./pages/Products";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <div className="flex w-full h-screen">
+    <div className="h-screen w-full">
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Home />
             </ProtectedRoute>
           }
-        />
-        <Route path="/login" element={<LoginPage />} />
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/ourtasks" element={<OurTasks />} />
+          <Route path="/products" element={<Products />} />
+        </Route>
       </Routes>
     </div>
   );

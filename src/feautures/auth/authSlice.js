@@ -22,6 +22,10 @@ export const login = createAsyncThunk("auth/login", async (userData,thunkAPI) =>
 }
 );
 
+export const logout = createAsyncThunk("auth/logout", async () => {
+    localStorage.removeItem("accessToken")
+})
+
 const authSlice = createSlice({
     name:"auth",
     initialState,
@@ -39,7 +43,12 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.err = action.payload;
         })
-    }
+        .addCase(logout.fulfilled, (state) => {
+            state.isLoading = false;
+            state.currentUser = null;
+        })
+    },
+
 });
 
 export default authSlice.reducer;
