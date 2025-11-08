@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../feautures/auth/authSlice";
+import { logout } from "../../feautures/auth/authSlice";
 
 const LogoutModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();

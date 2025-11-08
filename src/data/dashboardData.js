@@ -1,0 +1,101 @@
+export const dashboardData = {
+  stats: [
+    { id: 1, title: "Total Users", value: 1280, change: "+8%" },
+    { id: 2, title: "Orders Today", value: 256, change: "+3%" },
+    { id: 3, title: "Revenue", value: "$12,340", change: "+12%" },
+    { id: 4, title: "Bounce Rate", value: "24%", change: "-2%" },
+  ],
+
+  chartData: [
+    { month: "Jan", sales: 4000, users: 2400 },
+    { month: "Feb", sales: 3000, users: 2210 },
+    { month: "Mar", sales: 5000, users: 2290 },
+    { month: "Apr", sales: 4780, users: 2000 },
+    { month: "May", sales: 5890, users: 2181 },
+    { month: "Jun", sales: 4390, users: 2500 },
+  ],
+
+    transactions: [
+  {
+    id: 1,
+    user: "Alice Johnson",
+    amount: "$120.50",
+    date: "2025-10-20",
+    status: "Completed",
+    method: "Credit Card",
+  },
+  {
+    id: 2,
+    user: "Bob Smith",
+    amount: "$89.99",
+    date: "2025-10-22",
+    status: "Pending",
+    method: "PayPal",
+  },
+  {
+    id: 3,
+    user: "Charlie Brown",
+    amount: "$45.00",
+    date: "2025-10-23",
+    status: "Failed",
+    method: "Bank Transfer",
+  },
+  {
+    id: 4,
+    user: "David Wilson",
+    amount: "$250.00",
+    date: "2025-10-24",
+    status: "Completed",
+    method: "Credit Card",
+  },
+  {
+    id: 5,
+    user: "Emma Davis",
+    amount: "$72.30",
+    date: "2025-10-25",
+    status: "Completed",
+    method: "PayPal",
+  },
+  {
+    id: 6,
+    user: "Frank Miller",
+    amount: "$130.00",
+    date: "2025-10-26",
+    status: "Pending",
+    method: "Debit Card",
+  },
+  {
+    id: 7,
+    user: "Grace Lee",
+    amount: "$58.99",
+    date: "2025-10-27",
+    status: "Completed",
+    method: "Bank Transfer",
+  },
+  {
+    id: 8,
+    user: "Henry Clark",
+    amount: "$199.49",
+    date: "2025-10-28",
+    status: "Failed",
+    method: "Credit Card",
+  },
+  {
+    id: 9,
+    user: "Isabella Martinez",
+    amount: "$305.75",
+    date: "2025-10-29",
+    status: "Completed",
+    method: "PayPal",
+  },
+  {
+    id: 10,
+    user: "Jack Thompson",
+    amount: "$87.60",
+    date: "2025-10-30",
+    status: "Pending",
+    method: "Debit Card",
+  },
+]
+
+};
