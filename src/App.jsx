@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./layouts/Home";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -19,6 +19,7 @@ function App() {
             </ProtectedRoute>
           }
         >
+          <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/ourtasks" element={<OurTasks />} />
           <Route path="/products" element={<Products />} />
