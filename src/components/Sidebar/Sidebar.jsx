@@ -1,13 +1,23 @@
 import { LogOut } from "lucide-react";
-import logo from "././../../assets/img/Logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogoutModal from "./LogoutModal";
 import Navbar from "./NavBar";
 import UserInfo from "./UserInfo";
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isSidebarOpen]);
 
+  if (!isSidebarOpen) return null;
   return (
     <>
       <aside
@@ -17,10 +27,9 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           ${!isSidebarOpen ? "pointer-events-none" : "pointer-events-auto"}
         `}
       >
-        {/* backdrop */}
         {isSidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/40 z-30 md:hidden"
+            className="fixed inset-0 bg-black/40 z-30 "
             onClick={toggleSidebar}
           />
         )}
@@ -49,7 +58,6 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         </div>
       </aside>
 
-      {/* modal */}
       <div>
         <LogoutModal
           isOpen={isModalOpen}
