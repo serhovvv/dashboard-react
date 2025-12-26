@@ -15,10 +15,10 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import { dashboardData } from "../../data/dashboardData";
-import TableHead from "@mui/material/TableHead";
-import BasicSelect from "../ui/Select";
+import BasicSelect from "./ui/Select";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Calendar } from "lucide-react";
+import CustomTable from "../ui/CustomTable";
 
 const transactions = dashboardData.transactions;
 
@@ -96,12 +96,46 @@ export default function CustomPaginationActionsTable() {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
+
+  const columns = [
+    { id: "user", label: "User" },
+    { id: "amount", label: "Amount" },
+    {
+      id: "date",
+      label: "Date",
+      align: "right",
+      render: (value) => (
+        <div className="flex items-center justify-end gap-2">
+          <Calendar />
+          <span>{value}</span>
+        </div>
+      ),
+    },
+    {
+      id: "status",
+      label: "Status",
+      align: "right",
+      render: (value) => {
+        const bg =
+          value === "Completed"
+            ? "bg-green-500"
+            : value === "Pending"
+            ? "bg-yellow-500"
+            : "bg-red-500";
+
+        return (
+          <span className={`p-2 rounded-lg text-white ${bg}`}>{value}</span>
+        );
+      },
+    },
+  ];
+
   if (isMobile) {
     return (
       <div>
         <div className="flex justify-between">
           <p className="text-2xl font-semibold p-4">Transactions</p>
-          <BasicSelect setSortDate={setSortDate} />
+          <BasicSelect sortDate={sortDate} setSortDate={setSortDate} />
         </div>
         <Box display="grid" p={2} gap={2}>
           {paginated.map((trans) => {
@@ -156,93 +190,11 @@ export default function CustomPaginationActionsTable() {
         <p className="text-2xl font-semibold p-4">Transactions</p>
         <BasicSelect setSortDate={setSortDate} />
       </div>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: 600, fontSize: "16px" }}>
-                User
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: 600, fontSize: "16px" }}
-                align="right"
-              >
-                Date
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: 600, fontSize: "16px" }}
-                align="right"
-              >
-                Amount
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: 600, fontSize: "16px" }}
-                align="right"
-              >
-                Status
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {paginated.map((trans) => {
-              const changeBg =
-                trans.status === "Completed"
-                  ? "bg-green-500"
-                  : trans.status === "Pending"
-                  ? "bg-yellow-500"
-                  : trans.status === "Failed"
-                  ? "bg-red-500"
-                  : "";
-              return (
-                <TableRow key={trans.id}>
-                  <TableCell component="th" scope="row">
-                    <span>{trans.user}</span>
-                  </TableCell>
-                  <TableCell align="right">
-                    <div className="flex items-center justify-end gap-2">
-                      <Calendar className="flex" />
-                      <span>{trans.date}</span>
-                    </div>
-                  </TableCell>
-                  <TableCell align="right">
-                    <span className="font-bold text-[16px]">
-                      {trans.amount}
-                    </span>
-                  </TableCell>
-                  <TableCell align="right">
-                    <div className="w-full flex  justify-end">
-                      <span
-                        className={`w-[85px] justify-center flex rounded-lg p-2 ${changeBg}`}
-                      >
-                        {trans.status}
-                      </span>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
-
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[]}
-                colSpan={4}
-                count={transactions.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer>
+      <CustomTable
+        columns={columns}
+        rows={transactions}
+        sortedTransactions={sortedTransactions}
+      />
     </div>
   );
 }
