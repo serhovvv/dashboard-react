@@ -2,7 +2,12 @@ import React from "react";
 
 import logo from "././../../assets/img/Logo.png";
 import { NavLink } from "react-router-dom";
-import { ChartColumnDecreasing, CheckCheck, ShoppingCart } from "lucide-react";
+import {
+  ChartColumnDecreasing,
+  CheckCheck,
+  Plus,
+  ShoppingCart,
+} from "lucide-react";
 const Navbar = () => {
   const linkClass = ({ isActive }) =>
     `p-2 flex gap-x-2 rounded-lg hover:bg-green-50 text-[var(--text-primary)] ${
@@ -26,9 +31,9 @@ const Navbar = () => {
           <ShoppingCart size={"24px"} />
           Products
         </NavLink>
-        <NavLink className={linkClass} to="/ourtasks">
-          <CheckCheck size={"24px"} />
-          Our Tasks
+        <NavLink className={linkClass} to="/addproduct">
+          <Plus />
+          Add Products
         </NavLink>
       </div>
     </nav>

@@ -2,13 +2,13 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./layouts/Home";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import OurTasks from "./pages/OurTasks";
 import Products from "./pages/Products";
 import Dashboard from "./pages/Dashboard";
+import AddProduct from "./pages/AddProduct";
 
 function App() {
   return (
-    <div className="h-screen w-full">
+    <div className="min-h-screen w-full">
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route
@@ -21,8 +21,8 @@ function App() {
         >
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/ourtasks" element={<OurTasks />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/addproduct" element={<AddProduct />} />
         </Route>
       </Routes>
     </div>
