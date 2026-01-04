@@ -17,7 +17,6 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     };
   }, [isSidebarOpen]);
 
-  if (!isSidebarOpen) return null;
   return (
     <>
       <aside

@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
-
 import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../feautures/products/productSlice";
 import CustomTable from "../ui/CustomTable";
 import { selectFilteredProducts } from "../../feautures/selectors/selectors";
+import { Edit } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductTable({ selected, setSelected }) {
   const products = useSelector(selectFilteredProducts);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -78,6 +80,18 @@ export default function ProductTable({ selected, setSelected }) {
     },
     { id: "price", label: "Price", render: (value) => <span>${value}</span> },
     { id: "stock", label: "Stock" },
+    {
+      id: "actions",
+      label: "Actions",
+      render: (_, row) => (
+        <button
+          onClick={() => navigate(`/editproduct/${row.id}`)}
+          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
+          <Edit size={18} className="text-black" />
+        </button>
+      ),
+    },
   ];
 
   return (

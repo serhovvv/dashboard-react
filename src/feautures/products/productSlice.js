@@ -12,6 +12,18 @@ export const fetchProducts = createAsyncThunk("products/fetchItems", async (_,th
     }
 })
 
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async (updatedProduct, thunkAPI) => {
+    try {
+      const response = await axios.put(`${BASE_URL}/${updatedProduct.id}`, updatedProduct);
+      return response.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data?.error || "Failed to update product");
+    }
+  }
+);
+
 export const addProducts = createAsyncThunk("products/addItems", async (newItem, thunkAPI)=>{
     try {
         const response = await axios.post(BASE_URL, newItem)
@@ -55,7 +67,12 @@ const productSlice = createSlice({
         .addCase(addProducts.pending, (state) =>{state.err = null} )
         .addCase(addProducts.rejected, (state, action) =>{state.err = action.payload} )
         .addCase(deleteProducts.fulfilled,(state,action) =>{state.products = state.products.filter((item)=>!action.payload.includes(item.id))} )
-    }
+        .addCase(updateProduct.fulfilled, (state, action) => {
+            const index = state.filteredProducts.findIndex((product) => product.id === action.payload.id);
+            if (index !== -1) {
+                state.filteredProducts[index] = action.payload;
+            }
+        })}
 
 })
 
